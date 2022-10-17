@@ -3,19 +3,27 @@ Library  SeleniumLibrary
 Library  ../Resources/Generator.py
 Library  ../TestKeywords/GoogleSearchPage.py
 
+*** Variables ***
+@{browser_to_test}=    Create List    Chrome    Firefox
+
 *** Test Cases ***
 Search in google
     [Documentation]  Search in google for X names
     [Tags]  search google functionality regression
-    Open main page
-    accept cookies
-    @{list}=  Generate names  10
-    FOR    ${item}    IN    @{list}
-        search for  ${item}
-        Sleep   3s
-        go back browser
+    @{browser_installed}=  Install list of browsers  ${browser_to_test}
+    @{list}=  Generate names  3
+    FOR    ${browser}    IN    @{browser_installed}
+        Get driver
+        Open main page
+        accept cookies
+        FOR    ${item}    IN    @{list}
+            search for  ${item}
+            Sleep   3s
+            go back browser
+        END
+        Sleep  5s
+        Close Browser
     END
-    Sleep  5s
-    [Teardown]    Close Browser
+    [Teardown]    Close All Browsers
 
 

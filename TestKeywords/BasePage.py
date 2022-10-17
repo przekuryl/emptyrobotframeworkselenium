@@ -1,14 +1,22 @@
-from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from Resources.Drivers import Drivers
 
 
 # Parent class for all pages
 
-class BasePage:
+class BasePage(Drivers):
 
-    def __init__(self, driver):
-        self.driver = driver
+    def __init__(self):
+        super().__init__()
+        if self.drivers:
+            self.get_driver()
+        else:
+            self.driver = None
+
+    def get_driver(self):
+        if self.drivers:
+            self.driver = self.drivers.pop()
 
     def open_url(self, url):
         self.driver.get(url)
@@ -29,4 +37,3 @@ class BasePage:
 
     def go_back_browser(self):
         self.driver.back()
-

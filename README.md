@@ -1,12 +1,11 @@
-Get webdrivers (like browsers for automated test):
-One way is to download them manually and them to PATH
-or use webdrivermanager e.g:
+Install pip, python - just google it :-)
 
-pip install webdrivermanager
-webdrivermanager firefox chrome --linkpath /usr/local/bin
+Install Requirements:
+pip install -r Requirements/requirements.txt
 
-Requirements:
-pip install Requirements/requirements.txt
+Add your robotframework project into environmental variables:
+Go to environment variables > if there is no PYTHONPATH variable, add it. 
+Inside PYTHONPATH, add path to your project repository.
 
 Run test suite (cmd command):
-robot -d ./Results ./TestSuites/TestSuite.robot
+robot -d ./Results ./TestSuites/GoogleSearchSuite.robot
